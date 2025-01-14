@@ -4,11 +4,8 @@
     {
         public int Id { get; set; }
         public string FullName { get; set; }
-        public string Email { get; set; }
-        public string PasswordHash { get; set; } // Hashed password for security
         public decimal Weight { get; set; }
         public decimal Height { get; set; }
-        public string Goal { get; set; } // Npr. mršavljenje, povećanje mišićne mase
         public int Age { get; set; }
 
         public string SelectedSport { get; set; }           // Odabrani sport kao string

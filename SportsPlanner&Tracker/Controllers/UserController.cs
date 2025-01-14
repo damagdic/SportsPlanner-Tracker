@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SportsPlanner_Tracker.Data;  // Ovdje dodaj namespace gdje je AppDbContext
 using SportsPlanner_Tracker.Models;
 using SportsPlanner_Tracker.ViewModels;
 
@@ -6,6 +7,14 @@ namespace SportsPlanner_Tracker.Controllers
 {
     public class UserController : Controller
     {
+        private readonly AppDbContext _context;
+
+        // Konstruktor u kojem injektiraš AppDbContext
+        public UserController(AppDbContext context)
+        {
+            _context = context;
+        }
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -25,12 +34,11 @@ namespace SportsPlanner_Tracker.Controllers
                     Age = model.Age,
                     Height = model.Height,
                     Weight = model.Weight,
-                    Sport = model.SelectedSport,
-                    TrainingGoals = model.SelectedTrainingGoal,
-                    NutritionGoals = model.SelectedNutritionGoal
+                    SelectedSport = model.SelectedSport,
+                    SelectedTrainingGoal = model.SelectedTrainingGoal,
+                    SelectedNutritionGoal = model.SelectedNutritionGoal
                 };
 
-                // Assuming _context is the AppDbContext instance
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
