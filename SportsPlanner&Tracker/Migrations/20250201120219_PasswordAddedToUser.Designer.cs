@@ -12,8 +12,8 @@ using SportsPlanner_Tracker.Data;
 namespace SportsPlanner_Tracker.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250106182714_addUser")]
-    partial class addUser
+    [Migration("20250201120219_PasswordAddedToUser")]
+    partial class PasswordAddedToUser
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -259,22 +259,20 @@ namespace SportsPlanner_Tracker.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("BMI")
+                        .HasColumnType("float");
+
+                    b.Property<int>("CaloricNeeds")
+                        .HasColumnType("int");
 
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Goal")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<double>("Height")
+                        .HasColumnType("float");
 
-                    b.Property<decimal>("Height")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("PasswordHash")
+                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -290,8 +288,8 @@ namespace SportsPlanner_Tracker.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("Weight")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Weight")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

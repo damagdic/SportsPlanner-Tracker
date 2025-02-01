@@ -12,8 +12,7 @@ namespace SportsPlanner_Tracker.Controllers
         {
             _logger = logger;
         }
-
-        public IActionResult Index()
+        public IActionResult UserInfo()
         {
             return View();
         }

@@ -1,0 +1,34 @@
+﻿@model SportsPlanner_Tracker.ViewModels.UserInputVM
+
+<h2>User Information</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Age</th>
+            <th>Sport</th>
+            <th>Training Goal</th>
+            <th>Nutrition Goal</th>
+            <th>BMI</th>
+            <th>Caloric Needs</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.FullName</td>
+            <td>@Model.Weight</td>
+            <td>@Model.Height</td>
+            <td>@Model.Age</td>
+            <td>@Model.SelectedSport</td>
+            <td>@Model.SelectedTrainingGoal</td>
+            <td>@Model.SelectedNutritionGoal</td>
+            <td>@Model.BMI</td>
+            <td>@Model.CaloricNeeds</td>
+        </tr>
+    </tbody>
+</table>
+
+<a asp-controller="User" asp-action="Create" class="btn btn-primary">Create Another User</a>

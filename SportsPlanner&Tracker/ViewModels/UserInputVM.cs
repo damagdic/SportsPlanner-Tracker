@@ -1,11 +1,17 @@
-﻿namespace SportsPlanner_Tracker.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SportsPlanner_Tracker.ViewModels
 {
     public class UserInputVM
     {
         public string FullName { get; set; }
         public int Age { get; set; }
-        public decimal Height { get; set; } // in cm
-        public decimal Weight { get; set; } // in kg
+        public double Height { get; set; } // in cm
+        public double Weight { get; set; } // in kg
+
+        public decimal? BMI { get; set; } // percentage
+
+        public int? CaloricNeeds { get; set; } // in number
 
         // Dropdown selections
         public string SelectedSport { get; set; }
@@ -27,6 +33,10 @@
         {
             "Weight Loss", "Gaining Muscle Mass", "Maintaining Weight"
         };
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
     }
 }
 

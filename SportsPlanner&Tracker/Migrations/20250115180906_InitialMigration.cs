@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace SportsPlanner_Tracker.Migrations
 {
     /// <inheritdoc />
-    public partial class addUser : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -75,15 +75,14 @@ namespace SportsPlanner_Tracker.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FullName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Weight = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Height = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    Goal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Weight = table.Column<double>(type: "float", nullable: false),
+                    Height = table.Column<double>(type: "float", nullable: false),
                     Age = table.Column<int>(type: "int", nullable: false),
                     SelectedSport = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SelectedTrainingGoal = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SelectedNutritionGoal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    SelectedNutritionGoal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BMI = table.Column<double>(type: "float", nullable: false),
+                    CaloricNeeds = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -120,7 +119,7 @@ namespace SportsPlanner_Tracker.Migrations
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CaloricTarget = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    CaloricTarget = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: false),
                     GoalId = table.Column<int>(type: "int", nullable: false)
                 },
