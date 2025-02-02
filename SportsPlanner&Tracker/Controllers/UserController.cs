@@ -67,8 +67,6 @@ namespace SportsPlanner_Tracker.Controllers
             }
 
            
-
-            // If the model state is not valid, re-render the form with validation errors
             return View(model);
         }
         public IActionResult UserInfo()

@@ -18,7 +18,7 @@
         {
             int adjustment = caloricNeeds; // Počinje s osnovnim kalorijama
 
-            // 📌 PRVO primjenjujemo NutritionGoal (deficit/suficit)
+            // PRVO primjenjujemo NutritionGoal (deficit/suficit)
             if (selectedNutritionGoal == "WeightLoss")
             {
                 adjustment -= 500; // Deficit za mršavljenje
@@ -28,7 +28,7 @@
                 adjustment += 500; // Suficit za dobivanje mišićne mase
             }
 
-            // 📌 ONDA primjenjujemo TrainingGoal (dodatni kalorijski utjecaj)
+            // ONDA primjenjujemo TrainingGoal (dodatni kalorijski utjecaj)
             switch (selectedTrainingGoal)
             {
                 case "Physical":
@@ -44,7 +44,7 @@
 
             Console.WriteLine($"[DEBUG] Adjusted Calories After Nutrition Goal: {adjustment}");
 
-            return adjustment; // 📌 Vraćamo ispravno izračunate kalorijske potrebe
+            return adjustment; // Vraćamo ispravno izračunate kalorijske potrebe
         }
         public List<string> GenerateWeeklyTrainingPlan(string sport, string selectedTrainingGoal, string selectedNutritionGoal)
         {

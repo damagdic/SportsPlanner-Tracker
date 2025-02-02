@@ -1,0 +1,29 @@
+﻿@model SportsPlanner_Tracker.ViewModels.PlannerVM
+
+@{
+    ViewData["Title"] = "Edit Plan";
+}
+
+<h2>Edit Plan for @Model.Date.ToShortDateString()</h2>
+
+<form method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label asp-for="TrainingType" class="form-label">Training Type</label>
+        <input asp-for="TrainingType" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="MealPlan" class="form-label">Meal Plan</label>
+        <input asp-for="MealPlan" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Notes" class="form-label">Notes</label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

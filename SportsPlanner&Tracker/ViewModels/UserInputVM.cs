@@ -6,19 +6,19 @@ namespace SportsPlanner_Tracker.ViewModels
     {
         public string FullName { get; set; }
         public int Age { get; set; }
-        public double Height { get; set; } // in cm
-        public double Weight { get; set; } // in kg
+        public double Height { get; set; } // u cm
+        public double Weight { get; set; } // u kg
 
-        public decimal? BMI { get; set; } // percentage
+        public decimal? BMI { get; set; } // postotak
 
-        public int? CaloricNeeds { get; set; } // in number
+        public int? CaloricNeeds { get; set; } // broj
 
-        // Dropdown selections
+        // Dropdown 
         public string SelectedSport { get; set; }
         public string SelectedTrainingGoal { get; set; }
         public string SelectedNutritionGoal { get; set; }
 
-        // Dropdown options
+        // Dropdown opcije
         public List<string> Sports { get; set; } = new List<string>
         {
             "Football", "Tennis", "Volleyball", "Basketball", "Handball", "Fitness"

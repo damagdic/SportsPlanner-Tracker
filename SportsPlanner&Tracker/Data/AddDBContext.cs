@@ -13,10 +13,9 @@ namespace SportsPlanner_Tracker.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<TrainingPlan> TrainingPlans { get; set; }
-        public DbSet<NutritionPlan> NutritionPlans { get; set; }
-        public DbSet<Sport> Sports { get; set; }
-        public DbSet<TrainingGoal> TrainingGoals { get; set; }
-        public DbSet<NutritionGoal> NutritionGoals { get; set; }
+
+        public DbSet<Planner> Planners { get; set; }
+
+        public DbSet<UserProgress> UserProgress { get; set; }
     }
 }

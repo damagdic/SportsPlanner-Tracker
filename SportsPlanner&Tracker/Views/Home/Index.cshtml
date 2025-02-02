@@ -1,8 +1,29 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Welcome to Sports Planner & Tracker";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+<div class="container mt-5">
+    <div class="jumbotron text-center">
+        <h1 class="display-4">Welcome to Sports Planner & Tracker</h1>
+        <p class="lead">Plan your training and track your progress with ease.</p>
+    </div>
+
+    <div class="row text-center">
+        <div class="col-md-4">
+            <h3 class="mt-2">Plan Your Training</h3>
+            <p>Customize your weekly and monthly training schedule.</p>
+            <a asp-controller="Planner" asp-action="Index" class="btn btn-primary">Go to Planner</a>
+        </div>
+        <div class="col-md-4">
+            <h3 class="mt-2">Track Your Progress</h3>
+            <p>Monitor your fitness journey with detailed progress tracking.</p>
+            <a asp-controller="Tracker" asp-action="Index" class="btn btn-success">View Progress</a>
+        </div>
+        <div class="col-md-4">
+            <h3 class="mt-2">Your Profile</h3>
+            <p>View and update your personal training and nutrition details.</p>
+            <a asp-controller="User" asp-action="UserInfo" class="btn btn-info">User Info</a>
+        </div>
+    </div>
 </div>

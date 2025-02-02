@@ -16,8 +16,6 @@ namespace SportsPlanner_Tracker.Models
         public string SelectedTrainingGoal { get; set; }    // Odabrani cilj treninga kao string
         public string SelectedNutritionGoal { get; set; }   // Odabrani cilj prehrane kao string
 
-        public ICollection<TrainingPlan> TrainingPlans { get; set; }
-        public ICollection<NutritionPlan> NutritionPlans { get; set; }
         public int CaloricNeeds { get; internal set; }
         public double BMI { get; internal set; }
         

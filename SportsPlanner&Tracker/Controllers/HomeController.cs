@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SportsPlanner_Tracker.Models;
 using System.Diagnostics;
 
@@ -12,12 +12,14 @@ namespace SportsPlanner_Tracker.Controllers
         {
             _logger = logger;
         }
-        public IActionResult UserInfo()
+
+        // Dodano: Početna stranica (Home Page)
+        public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult UserInfo()
         {
             return View();
         }

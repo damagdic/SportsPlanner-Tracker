@@ -2,17 +2,17 @@
 {
     public class ResultVM
     {
-        // info about user
+        // info o korisniku
         public string FullName { get; set; }
         public int Age { get; set; }
         public double Height { get; set; } // in cm
         public double Weight { get; set; } // in kg
 
-        // BMI and caloric needs
+        // BMI i kalorijske potrebe
         public double BMI { get; set; }
         public int CaloricRequirement { get; set; }
 
-        // chooses of user
+        // izabori korisnika
         public string SelectedSport { get; set; }
         public string SelectedTrainingGoal { get; set; }
         public string SelectedNutritionGoal { get; set; }

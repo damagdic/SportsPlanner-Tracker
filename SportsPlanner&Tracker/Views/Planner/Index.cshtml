@@ -1,0 +1,89 @@
+﻿@model List<SportsPlanner_Tracker.ViewModels.PlannerEntryVM>
+
+@{
+    ViewData["Title"] = "Monthly Planner";
+    var today = DateTime.Today;
+    var daysInMonth = DateTime.DaysInMonth(today.Year, today.Month);
+}
+
+<h2>Monthly Planner - @today.ToString("MMMM yyyy")</h2>
+
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int dayCounter = 1;
+            var firstDayOfMonth = new DateTime(today.Year, today.Month, 1);
+            int startDay = (int)firstDayOfMonth.DayOfWeek;
+        }
+        <tr>
+            @for (int i = 0; i < startDay; i++)
+            {
+                <td></td>
+            }
+            @for (int i = startDay; i < 7; i++)
+            {
+                if (dayCounter <= daysInMonth)
+                {
+                    var dayDate = new DateTime(today.Year, today.Month, dayCounter);
+                    var dayPlan = Model.FirstOrDefault(p => p.Date.Date == dayDate.Date);
+
+                    <td>
+                        <strong>@dayCounter</strong>
+                        <ul class="list-unstyled">
+                            @if (dayPlan != null)
+                            {
+                                <li><strong>Training:</strong> @dayPlan.TrainingType</li>
+                                <li><strong>Meal:</strong> @dayPlan.MealPlan</li>
+                                <li><a asp-controller="Planner" asp-action="Edit" asp-route-id="@dayPlan.Id" class="btn btn-sm btn-warning">Edit</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Planner" asp-action="Create" asp-route-date="@dayDate.ToString("yyyy-MM-dd")" class="btn btn-sm btn-success">+</a></li>
+                            }
+                        </ul>
+                    </td>
+                    dayCounter++;
+                }
+            }
+        </tr>
+        @while (dayCounter <= daysInMonth)
+        {
+            <tr>
+                @for (int i = 0; i < 7 && dayCounter <= daysInMonth; i++)
+                {
+                    var dayDate = new DateTime(today.Year, today.Month, dayCounter);
+                    var dayPlan = Model.FirstOrDefault(p => p.Date.Date == dayDate.Date);
+
+                    <td>
+                        <strong>@dayCounter</strong>
+                        <ul class="list-unstyled">
+                            @if (dayPlan != null)
+                            {
+                                <li><strong>Training:</strong> @dayPlan.TrainingType</li>
+                                <li><strong>Meal:</strong> @dayPlan.MealPlan</li>
+                                <li><a asp-controller="Planner" asp-action="Edit" asp-route-id="@dayPlan.Id" class="btn btn-sm btn-warning">Edit</a></li>
+                            }
+                            else
+                            {
+                                <li><a asp-controller="Planner" asp-action="Create" asp-route-date="@dayDate.ToString("yyyy-MM-dd")" class="btn btn-sm btn-success">+</a></li>
+                            }
+                        </ul>
+                    </td>
+                    dayCounter++;
+                }
+            </tr>
+        }
+    </tbody>
+</table>
