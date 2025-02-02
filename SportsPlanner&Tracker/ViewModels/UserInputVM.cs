@@ -37,6 +37,10 @@ namespace SportsPlanner_Tracker.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public int CaloricAverage { get; set; }
+
+        public List<string> WeeklyTrainingPlan { get; set; } = new List<string>();
     }
 }
 

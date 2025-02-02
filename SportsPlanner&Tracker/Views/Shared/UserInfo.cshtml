@@ -13,7 +13,9 @@
             <th>Training Goal</th>
             <th>Nutrition Goal</th>
             <th>BMI</th>
-            <th>Caloric Needs</th>
+            <th>Caloric Needs (Plan Adjusted)</th>
+            <th>Caloric Needs (Baseline)</th>
+            <th>Difference</th>
         </tr>
     </thead>
     <tbody>
@@ -27,8 +29,20 @@
             <td>@Model.SelectedNutritionGoal</td>
             <td>@Model.BMI</td>
             <td>@Model.CaloricNeeds</td>
+            <td>@Model.CaloricAverage</td>
+            <td>@(Model.CaloricNeeds - Model.CaloricAverage)</td> <!-- Razlika između prilagođenih i osnovnih potreba -->
         </tr>
     </tbody>
 </table>
+
+<h2>Weekly Training Plan</h2>
+<ul class="list-group">
+    @foreach (var session in Model.WeeklyTrainingPlan)
+    {
+        <li class="list-group-item">@session</li>
+    }
+</ul>
+
+<br /><br />
 
 <a asp-controller="User" asp-action="Create" class="btn btn-primary">Create Another User</a>
