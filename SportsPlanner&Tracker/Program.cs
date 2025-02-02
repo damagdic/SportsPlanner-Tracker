@@ -1,7 +1,19 @@
+using Microsoft.EntityFrameworkCore;
+using SportsPlanner_Tracker.Data;
+using SportsPlanner_Tracker.Services;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnString")));
+builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProgressChartService>();
+
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -9,9 +21,10 @@ var app = builder.Build();
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseSession();
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

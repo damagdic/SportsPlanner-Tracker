@@ -1,18 +1,24 @@
-﻿namespace SportsPlanner_Tracker.ViewModels
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SportsPlanner_Tracker.ViewModels
 {
     public class UserInputVM
     {
         public string FullName { get; set; }
         public int Age { get; set; }
-        public decimal Height { get; set; } // in cm
-        public decimal Weight { get; set; } // in kg
+        public double Height { get; set; } // u cm
+        public double Weight { get; set; } // u kg
 
-        // Dropdown selections
+        public decimal? BMI { get; set; } // postotak
+
+        public int? CaloricNeeds { get; set; } // broj
+
+        // Dropdown 
         public string SelectedSport { get; set; }
         public string SelectedTrainingGoal { get; set; }
         public string SelectedNutritionGoal { get; set; }
 
-        // Dropdown options
+        // Dropdown opcije
         public List<string> Sports { get; set; } = new List<string>
         {
             "Football", "Tennis", "Volleyball", "Basketball", "Handball", "Fitness"
@@ -27,6 +33,14 @@
         {
             "Weight Loss", "Gaining Muscle Mass", "Maintaining Weight"
         };
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+
+        public int CaloricAverage { get; set; }
+
+        public List<string> WeeklyTrainingPlan { get; set; } = new List<string>();
     }
 }
 

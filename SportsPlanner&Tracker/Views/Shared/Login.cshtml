@@ -1,0 +1,30 @@
+﻿@model SportsPlanner_Tracker.ViewModels.LoginVM
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+<form method="post" asp-controller="User" asp-action="Login">
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">Full Name</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Password" class="form-label">Password</label>
+        <input asp-for="Password" type="password" class="form-control" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+
+    <p class="mt-3">Don't have an account? <a asp-controller="User" asp-action="Create">Register here</a></p>
+
+    @if (!ViewData.ModelState.IsValid)
+    {
+        <p class="text-danger">Invalid Full Name or Password.</p>
+    }
+</form>

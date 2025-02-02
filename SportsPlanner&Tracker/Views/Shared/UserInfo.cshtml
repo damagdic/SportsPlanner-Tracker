@@ -1,0 +1,47 @@
+﻿@model SportsPlanner_Tracker.ViewModels.UserInputVM
+
+<h2>User Information</h2>
+
+<table class="table table-dark table-striped">
+    <thead>
+        <tr>
+            <th>Full Name</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Age</th>
+            <th>Sport</th>
+            <th>Training Goal</th>
+            <th>Nutrition Goal</th>
+            <th>BMI</th>
+            <th>Caloric Needs (Plan Adjusted)</th>
+            <th>Caloric Needs (Baseline)</th>
+            <th>Difference</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Model.FullName</td>
+            <td>@Model.Weight</td>
+            <td>@Model.Height</td>
+            <td>@Model.Age</td>
+            <td>@Model.SelectedSport</td>
+            <td>@Model.SelectedTrainingGoal</td>
+            <td>@Model.SelectedNutritionGoal</td>
+            <td>@Model.BMI</td>
+            <td>@Model.CaloricNeeds</td>
+            <td>@Model.CaloricAverage</td>
+            <td>@(Model.CaloricNeeds - Model.CaloricAverage)</td> <!-- Razlika između prilagođenih i osnovnih potreba -->
+        </tr>
+    </tbody>
+</table>
+
+<h2>Recommended Weekly Training Plan</h2>
+<ul class="list-group">
+    @foreach (var session in Model.WeeklyTrainingPlan)
+    {
+        <li class="list-group-item">@session</li>
+    }
+</ul>
+
+<br /><br />
+

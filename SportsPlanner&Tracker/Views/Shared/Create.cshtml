@@ -1,0 +1,74 @@
+﻿@model SportsPlanner_Tracker.ViewModels.UserInputVM
+
+@{
+    ViewData["Title"] = "Create User";
+}
+
+<h1>Create User</h1>
+
+<form method="post">
+    <div class="form-group">
+        <label asp-for="FullName"></label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Password</label>
+        <input asp-for="Password" type="password" class="form-control" required />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Age"></label>
+        <input asp-for="Age" class="form-control" />
+        <span asp-validation-for="Age" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Height"></label>
+        <input asp-for="Height" class="form-control" />
+        <span asp-validation-for="Height" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Weight"></label>
+        <input asp-for="Weight" class="form-control" />
+        <span asp-validation-for="Weight" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedSport"></label>
+        <select asp-for="SelectedSport" class="form-control">
+            <option value="Football">Football</option>
+            <option value="Tennis">Tennis</option>
+            <option value="Volleyball">Volleyball</option>
+            <option value="Basketball">Basketball</option>
+            <option value="Handball">Handball</option>
+            <option value="Fitness">Fitness</option>
+        </select>
+        <span asp-validation-for="SelectedSport" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedTrainingGoal"></label>
+        <select asp-for="SelectedTrainingGoal" class="form-control">
+            <option value="Physical">Physical</option>
+            <option value="Technical">Technical</option>
+            <option value="Tactical">Tactical</option>
+        </select>
+        <span asp-validation-for="SelectedTrainingGoal" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="SelectedNutritionGoal"></label>
+        <select asp-for="SelectedNutritionGoal" class="form-control">
+            <option value="WeightLoss">Weight Loss</option>
+            <option value="GainingMuscleMass">Gaining Muscle Mass</option>
+            <option value="MaintainingWeight">Maintaining Weight</option>
+        </select>
+        <span asp-validation-for="SelectedNutritionGoal" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
