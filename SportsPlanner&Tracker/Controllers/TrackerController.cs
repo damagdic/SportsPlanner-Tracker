@@ -52,7 +52,15 @@ namespace SportsPlanner_Tracker.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
-                TempData["ErrorMessage"] = "You must be logged in to add progress.";
+                TempData["ErrorMessage"] = "Session expired. Please log in again.";
+                return RedirectToAction("Login", "User");
+            }
+
+            // Dohvati korisnika iz baze da koristi ažurirane podatke
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                TempData["ErrorMessage"] = "User not found.";
                 return RedirectToAction("Login", "User");
             }
 
@@ -66,8 +74,9 @@ namespace SportsPlanner_Tracker.Controllers
                 return View(model);
             }
 
+            // Koristi visinu korisnika iz baze
             model.UserId = userId.Value;
-            model.BMI = model.Weight / ((1.75) * (1.75)); // Privremeni izračun BMI-a
+            model.BMI = model.Weight / ((user.Height / 100.0) * (user.Height / 100.0)); // Ažurirana visina iz baze
 
             _context.UserProgress.Add(model);
             int savedChanges = _context.SaveChanges();

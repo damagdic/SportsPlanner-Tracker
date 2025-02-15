@@ -1,0 +1,61 @@
+﻿@model SportsPlanner_Tracker.ViewModels.EditProfileVM
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<h2>Edit Profile</h2>
+
+<form method="post">
+    <div class="mb-3">
+        <label asp-for="FullName" class="form-label">Full Name</label>
+        <input asp-for="FullName" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Age" class="form-label">Age</label>
+        <input asp-for="Age" type="number" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Height" class="form-label">Height (cm)</label>
+        <input asp-for="Height" type="number" step="0.1" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Weight" class="form-label">Weight (kg)</label>
+        <input asp-for="Weight" type="number" step="0.1" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedSport" class="form-label">Sport</label>
+        <select asp-for="SelectedSport" class="form-select" required>
+            @foreach (var sport in Model.Sports)
+            {
+                <option value="@sport" selected="@(Model.SelectedSport == sport ? "selected" : null)">@sport</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedTrainingGoal" class="form-label">Training Goal</label>
+        <select asp-for="SelectedTrainingGoal" class="form-select" required>
+            @foreach (var goal in Model.TrainingGoals)
+            {
+                <option value="@goal" selected="@(Model.SelectedTrainingGoal == goal ? "selected" : null)">@goal</option>
+            }
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="SelectedNutritionGoal" class="form-label">Nutrition Goal</label>
+        <select asp-for="SelectedNutritionGoal" class="form-select" required>
+            @foreach (var goal in Model.NutritionGoals)
+            {
+                <option value="@goal" selected="@(Model.SelectedNutritionGoal == goal ? "selected" : null)">@goal</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Save Changes</button>
+</form>

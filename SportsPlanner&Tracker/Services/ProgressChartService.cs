@@ -2,7 +2,6 @@
 using SportsPlanner_Tracker.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace SportsPlanner_Tracker.Services
@@ -16,7 +15,10 @@ namespace SportsPlanner_Tracker.Services
 
             int width = 800;
             int height = 400;
-            int margin = 60;
+            int leftMargin = 80;  
+            int rightMargin = 60;
+            int bottomMargin = 60;
+            int topMargin = 40;
 
             using (var bitmap = new SKBitmap(width, height))
             using (var canvas = new SKCanvas(bitmap))
@@ -30,10 +32,15 @@ namespace SportsPlanner_Tracker.Services
                     Style = SKPaintStyle.Stroke
                 };
 
+                var font = new SKFont
+                {
+                    Size = 16
+                };
+
                 var textPaint = new SKPaint
                 {
                     Color = SKColors.Black,
-                    TextSize = 18
+                    IsAntialias = true
                 };
 
                 var gridPaint = new SKPaint
@@ -57,28 +64,30 @@ namespace SportsPlanner_Tracker.Services
                     Style = SKPaintStyle.Fill
                 };
 
-                // Određivanje minimalne i maksimalne vrijednosti za Y osu (težina)
+                // Određivanje minimalne i maksimalne vrijednosti za Y-os (težina)
                 float minY = (float)progress.Min(p => p.Weight) - 2;
                 float maxY = (float)progress.Max(p => p.Weight) + 2;
 
                 // Priprema koordinata
-                float xStep = (width - 2 * margin) / Math.Max(progress.Count - 1, 1);
-                float yScale = (height - 2 * margin) / Math.Max(maxY - minY, 1);
+                float xStep = (width - leftMargin - rightMargin) / Math.Max(progress.Count - 1, 1);
+                float yScale = (height - topMargin - bottomMargin) / Math.Max(maxY - minY, 1);
 
                 // Crtanje X i Y ose
-                canvas.DrawLine(margin, height - margin, width - margin, height - margin, axisPaint); // X-os
-                canvas.DrawLine(margin, height - margin, margin, margin, axisPaint); // Y-os
+                canvas.DrawLine(leftMargin, height - bottomMargin, width - rightMargin, height - bottomMargin, axisPaint); // X-os
+                canvas.DrawLine(leftMargin, height - bottomMargin, leftMargin, topMargin, axisPaint); // Y-os
 
                 // Crtanje horizontalne mreže (grid)
                 for (float y = minY; y <= maxY; y += 2)
                 {
-                    float yCoord = height - margin - (y - minY) * yScale;
-                    canvas.DrawLine(margin, yCoord, width - margin, yCoord, gridPaint);
-                    canvas.DrawText(y.ToString("F1"), 10, yCoord + 5, textPaint);
+                    float yCoord = height - bottomMargin - (y - minY) * yScale;
+                    canvas.DrawLine(leftMargin, yCoord, width - rightMargin, yCoord, gridPaint);
+
+                    // Prikaz brojeva na Y-osi (poravnanje desno da ne izlaze van slike)
+                    canvas.DrawText(y.ToString("F1"), leftMargin - 15, yCoord + 5, SKTextAlign.Right, font, textPaint);
                 }
 
                 // Crtanje grafikona
-                var points = progress.Select((p, i) => new SKPoint(margin + i * xStep, height - margin - (float)((p.Weight - minY) * yScale))).ToArray();
+                var points = progress.Select((p, i) => new SKPoint(leftMargin + i * xStep, height - bottomMargin - (float)((p.Weight - minY) * yScale))).ToArray();
                 canvas.DrawPoints(SKPointMode.Polygon, points, linePaint);
 
                 // Dodavanje točaka na liniji za bolju vidljivost
@@ -90,8 +99,8 @@ namespace SportsPlanner_Tracker.Services
                 // Dodavanje datuma ispod X-ose
                 for (int i = 0; i < progress.Count; i++)
                 {
-                    float x = margin + i * xStep;
-                    canvas.DrawText(progress[i].Date.ToShortDateString(), x - 25, height - 5, textPaint);
+                    float x = leftMargin + i * xStep;
+                    canvas.DrawText(progress[i].Date.ToShortDateString(), x - 25, height - 5, SKTextAlign.Center, font, textPaint);
                 }
 
                 using (var image = SKImage.FromBitmap(bitmap))

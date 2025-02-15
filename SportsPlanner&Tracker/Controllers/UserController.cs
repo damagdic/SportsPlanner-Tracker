@@ -71,7 +71,7 @@ namespace SportsPlanner_Tracker.Controllers
         }
         public IActionResult UserInfo()
         {
-            // 📌 Dohvati ID korisnika iz sesije
+            // Dohvati ID korisnika iz sesije
             int? userId = HttpContext.Session.GetInt32("UserId");
             if (userId == null)
             {
@@ -139,6 +139,85 @@ namespace SportsPlanner_Tracker.Controllers
 
             return View(model);
         }
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear(); // Brišemo sve podatke iz sesije
+            return RedirectToAction("Login", "User"); // Preusmjeravanje na Login stranicu
+        }
+
+        [HttpGet]
+        public IActionResult EditProfile()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            var model = new EditProfileVM
+            {
+                FullName = user.FullName,
+                Age = user.Age,
+                Height = user.Height,
+                Weight = user.Weight,
+                SelectedSport = user.SelectedSport,
+                SelectedTrainingGoal = user.SelectedTrainingGoal,
+                SelectedNutritionGoal = user.SelectedNutritionGoal
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditProfile(EditProfileVM model)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "User");
+            }
+
+            if (ModelState.IsValid)
+            {
+                var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+                if (user == null)
+                {
+                    return RedirectToAction("Login", "User");
+                }
+
+                // Ažuriranje podataka korisnika
+                user.Age = model.Age;
+                user.Height = model.Height;
+                user.Weight = model.Weight;
+                user.SelectedSport = model.SelectedSport;
+                user.SelectedTrainingGoal = model.SelectedTrainingGoal;
+                user.SelectedNutritionGoal = model.SelectedNutritionGoal;
+
+                // Ispravan izračun BMI-a i kalorijskih potreba
+                double bmi = _userService.CalculateBMI(user.Height, user.Weight);
+                int caloricBaseline = _userService.CalculateCaloricNeeds(user.Weight, user.Age);
+                int adjustedCalories = _userService.AdjustCaloriesBasedOnTrainingGoal(
+                    caloricBaseline, user.SelectedTrainingGoal, user.SelectedNutritionGoal
+                );
+
+                user.BMI = Math.Round(bmi, 2);
+                user.CaloricNeeds = adjustedCalories;
+
+                _context.SaveChanges();
+
+                return RedirectToAction("UserInfo");
+            }
+
+
+            return View(model);
+        }
+
 
     }
 }

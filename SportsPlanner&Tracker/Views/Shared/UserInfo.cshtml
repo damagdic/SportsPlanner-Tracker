@@ -2,6 +2,10 @@
 
 <h2>User Information</h2>
 
+<a asp-controller="User" asp-action="EditProfile" class="btn btn-success">
+    <i class="fa-solid fa-user-edit"></i> Edit Profile
+</a>
+
 <table class="table table-dark table-striped">
     <thead>
         <tr>
@@ -36,7 +40,7 @@
 </table>
 
 <h2>Recommended Weekly Training Plan</h2>
-<ul class="list-group">
+<ul class="list-group list-group-dark">
     @foreach (var session in Model.WeeklyTrainingPlan)
     {
         <li class="list-group-item">@session</li>

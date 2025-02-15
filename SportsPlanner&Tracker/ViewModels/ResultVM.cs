@@ -12,7 +12,7 @@
         public double BMI { get; set; }
         public int CaloricRequirement { get; set; }
 
-        // izabori korisnika
+        // izbori korisnika
         public string SelectedSport { get; set; }
         public string SelectedTrainingGoal { get; set; }
         public string SelectedNutritionGoal { get; set; }

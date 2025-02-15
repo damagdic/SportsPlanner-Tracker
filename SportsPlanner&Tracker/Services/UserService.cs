@@ -13,12 +13,11 @@
             return (int)(10 * weight + 6.25 * 170 - 5 * age + 5);
         }
 
-        //Nova metoda: prilagođava kalorijske potrebe na osnovu trening cilja
+        // prilagođava kalorijske potrebe na osnovu trening cilja
         public int AdjustCaloriesBasedOnTrainingGoal(int caloricNeeds, string selectedTrainingGoal, string selectedNutritionGoal)
         {
             int adjustment = caloricNeeds; // Počinje s osnovnim kalorijama
 
-            // PRVO primjenjujemo NutritionGoal (deficit/suficit)
             if (selectedNutritionGoal == "WeightLoss")
             {
                 adjustment -= 500; // Deficit za mršavljenje
@@ -41,8 +40,6 @@
                     adjustment -= 100;
                     break;
             }
-
-            Console.WriteLine($"[DEBUG] Adjusted Calories After Nutrition Goal: {adjustment}");
 
             return adjustment; // Vraćamo ispravno izračunate kalorijske potrebe
         }
